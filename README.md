@@ -8,11 +8,37 @@ Spring Boot Starter，自动装配 [opencli-java-sdk](../opencli-java-sdk)，支
 <dependency>
   <groupId>io.github.hiwepy</groupId>
   <artifactId>opencli-spring-boot-starter</artifactId>
-  <version>1.0.x.20260516-SNAPSHOT</version>
+  <version>3.3.x.20260516-SNAPSHOT</version>
 </dependency>
 ```
 
-需先将同版本的 `opencli-java-sdk` 安装到本地或发布到可达的 Maven 仓库。
+需先将**同分支、同日期后缀**的 `opencli-java-sdk` 安装到本地或发布到可达的 Maven 仓库。
+
+发布到阿里云 Packages（`pom.xml` 已配置 `distributionManagement`）：
+
+```bash
+python3 scripts/render-branch-pom.py <branch>
+mvn clean deploy -Dmaven.test.skip=true
+```
+
+`settings.xml` 中需配置 `2624322-release-6F6h6R` 与 `2624322-snapshot-3EoOv3` 的私服账号。
+
+## 多版本与 JDK（对齐 dreamina-spring-boot-starter）
+
+`pom.xml` 由脚本按 Spring Boot 线生成：`spring-boot-starter-parent`、`maven-compiler-plugin` 的 `release` 与 `opencli-java-sdk.version` 与分支前缀一致。
+
+```bash
+python3 scripts/render-branch-pom.py <branch>   # 与 opencli-java-sdk 同分支名：3.3.x、2.7.x、4.0.x 等
+```
+
+| 分支 | Spring Boot parent | 编译 JDK | 与 SDK 版本 |
+|------|-------------------|----------|-------------|
+| `2.3.x` | 2.3.12.RELEASE | **8** | 同前缀 `2.3.x.*` |
+| `2.7.x` | 2.7.18 | **11** | `2.7.x.*` |
+| `3.0.x` … `3.4.x` | 3.0.13 … 3.4.2 | 17 | 与各 `3.x.x.*` 对齐 |
+| `3.3.x`（默认） | **3.3.6** | **17** | `3.3.x.*-SNAPSHOT` |
+| `3.5.x` | 3.5.6 | 21 | `3.5.x.*` |
+| `4.0.x` | 4.0.6 | 21 | `4.0.x.*` |
 
 ## 自动配置
 
