@@ -3,8 +3,14 @@ package io.github.hiwepy.opencli.spring.boot;
 import io.github.hiwepy.opencli.OpenCliClient;
 import io.github.hiwepy.opencli.adapter.browser.chatgpt.ChatgptOpenCliClient;
 import io.github.hiwepy.opencli.adapter.browser.claude.ClaudeOpenCliClient;
+import io.github.hiwepy.opencli.adapter.browser.gemini.GeminiOpenCliClient;
+import io.github.hiwepy.opencli.adapter.browser.jimeng.JimengOpenCliClient;
 import io.github.hiwepy.opencli.adapter.desktop.codex.CodexOpenCliClient;
 import io.github.hiwepy.opencli.adapter.desktop.cursor.CursorOpenCliClient;
+import io.github.hiwepy.opencli.adapter.publicapi.arxiv.ArxivOpenCliClient;
+import io.github.hiwepy.opencli.adapter.publicapi.binance.BinanceOpenCliClient;
+import io.github.hiwepy.opencli.adapter.publicapi.npm.NpmOpenCliClient;
+import io.github.hiwepy.opencli.adapter.publicapi.wikipedia.WikipediaOpenCliClient;
 import io.github.hiwepy.opencli.browser.OpenCliBrowserClient;
 import io.github.hiwepy.opencli.center.ws.OpenCliWsReverseAgentClient;
 import io.github.hiwepy.opencli.core.OpenCliExecutor;
@@ -140,6 +146,42 @@ public class OpenCliAutoConfiguration {
         @ConditionalOnMissingBean
         public ChatgptOpenCliClient chatgptOpenCliClient(OpenCliClient client) {
             return client.chatgpt();
+        }
+
+        @Bean
+        @ConditionalOnMissingBean
+        public GeminiOpenCliClient geminiOpenCliClient(OpenCliClient client) {
+            return client.gemini();
+        }
+
+        @Bean
+        @ConditionalOnMissingBean
+        public JimengOpenCliClient jimengOpenCliClient(OpenCliClient client) {
+            return client.jimeng();
+        }
+
+        @Bean
+        @ConditionalOnMissingBean
+        public NpmOpenCliClient npmOpenCliClient(OpenCliClient client) {
+            return client.npm();
+        }
+
+        @Bean
+        @ConditionalOnMissingBean
+        public ArxivOpenCliClient arxivOpenCliClient(OpenCliClient client) {
+            return client.arxiv();
+        }
+
+        @Bean
+        @ConditionalOnMissingBean
+        public WikipediaOpenCliClient wikipediaOpenCliClient(OpenCliClient client) {
+            return client.wikipedia();
+        }
+
+        @Bean
+        @ConditionalOnMissingBean
+        public BinanceOpenCliClient binanceOpenCliClient(OpenCliClient client) {
+            return client.binance();
         }
     }
 }
