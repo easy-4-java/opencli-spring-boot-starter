@@ -30,4 +30,12 @@ public class OpenCliStarterProperties extends OpenCliProperties {
      * 是否启用本 Starter 的自动配置 Bean。
      */
     private boolean enabled = true;
+
+    /**
+     * Chrome profile/context 别名，映射为 {@link #getLeadingArguments()} 的 {@code --profile <name>} 前缀。
+     */
+    private String browserProfile;
+
+    @org.springframework.boot.context.properties.NestedConfigurationProperty
+    private OpenCliCenterWsProperties center = new OpenCliCenterWsProperties();
 }
