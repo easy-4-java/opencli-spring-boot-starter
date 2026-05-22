@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
@@ -43,5 +44,19 @@ class OpenCliAutoConfigurationTest {
         assertNotNull(openCliClient);
         assertNotNull(openCliClient.getExecutor());
         assertSame(executor, openCliClient.getExecutor());
+    }
+
+    /**
+     * {@code opencli.browser-profile} 应写入 {@code leadingArguments} 的 {@code --profile} 前缀。
+     */
+    @Test
+    void browserProfileMapsToLeadingArguments() {
+        OpenCliStarterProperties props = new OpenCliStarterProperties();
+        props.setBrowserProfile("work");
+        OpenCliExecutor exec = new OpenCliAutoConfiguration().openCliExecutor(props);
+        assertNotNull(exec);
+        assertNotNull(props.getLeadingArguments());
+        assertEquals("--profile", props.getLeadingArguments().get(0));
+        assertEquals("work", props.getLeadingArguments().get(1));
     }
 }
