@@ -44,6 +44,9 @@ python3 scripts/render-branch-pom.py <branch>   # 与 opencli-java-sdk 同分支
 
 - 绑定 `opencli.*` 到 `OpenCliStarterProperties`（继承 SDK `OpenCliProperties`）
 - 注册单例 `OpenCliExecutor` 与 `OpenCliClient`（共享同一执行器）
+- `opencli.browser-profile` 映射为 `leadingArguments` 前缀 `--profile <name>`（与 CLI profile 一致）
+- `opencli.center.ws.*` 可选注册 `OpenCliWsReverseAgentClient`（`enabled=true`）
+- `opencli.facade.beans.enabled=true` 时额外注册：`OpenCliMetaClient`、`OpenCliBrowserClient`、`CodexOpenCliClient`、`CursorOpenCliClient`、`ClaudeOpenCliClient`、`ChatgptOpenCliClient`、`GeminiOpenCliClient`、`JimengOpenCliClient`、`NpmOpenCliClient`、`ArxivOpenCliClient`、`WikipediaOpenCliClient`、`BinanceOpenCliClient`
 - `META-INF/spring.factories` 与 `AutoConfiguration.imports` 兼容 Boot 2.7 / 3.x 发现机制
 
 ## application.yml 示例
@@ -53,11 +56,18 @@ opencli:
   enabled: true
   executable: opencli
   command-timeout-millis: 300000
+  browser-profile: work              # → leadingArguments: --profile work
   execution-target: REMOTE_AGENT_HTTP   # 或 LOCAL_PROCESS（默认）
   remote-agent-base-url: http://192.168.1.10:19823
   remote-collect-mode: cdp
   remote-output-format: json
   remote-capture-raw-http-response: false
+  facade:
+    beans:
+      enabled: true                  # 注册常用强类型 Bean
+  center:
+    ws:
+      enabled: false
 ```
 
 ## License
