@@ -32,6 +32,16 @@ public class OpenCliStarterProperties extends OpenCliProperties {
     private boolean enabled = true;
 
     /**
+     * 是否在应用启动时执行本机 {@code opencli list} 探测（远程 Agent 模式自动跳过）。
+     */
+    private boolean startupCheckEnabled = true;
+
+    /**
+     * 启动探测失败时是否中断应用启动；默认 false 仅打 WARN，生产可设为 true。
+     */
+    private boolean failFastOnUnavailable = false;
+
+    /**
      * Chrome profile/context 别名，映射为 {@link #getLeadingArguments()} 的 {@code --profile <name>} 前缀。
      */
     private String browserProfile;
