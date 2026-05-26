@@ -14,6 +14,7 @@ import io.github.hiwepy.opencli.adapter.publicapi.wikipedia.WikipediaOpenCliClie
 import io.github.hiwepy.opencli.browser.OpenCliBrowserClient;
 import io.github.hiwepy.opencli.center.ws.OpenCliWsReverseAgentClient;
 import io.github.hiwepy.opencli.core.OpenCliExecutor;
+import io.github.hiwepy.opencli.core.availability.OpenCliAvailabilityChecker;
 import io.github.hiwepy.opencli.meta.OpenCliMetaClient;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.util.StringUtils;
 
 /**
@@ -94,6 +96,34 @@ public class OpenCliAutoConfiguration {
     @ConditionalOnMissingBean
     public OpenCliClient openCliClient(OpenCliStarterProperties properties, OpenCliExecutor executor) {
         return new OpenCliClient(properties, executor);
+    }
+
+    /**
+     * CLI 可用性探测器（无状态）。
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public OpenCliAvailabilityChecker openCliAvailabilityChecker() {
+        return new OpenCliAvailabilityChecker();
+    }
+
+    /**
+     * 启动时校验本机 {@code opencli}（远程模式跳过）。
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    @ConditionalOnProperty(
+            prefix = OpenCliStarterProperties.PREFIX,
+            name = "startup-check-enabled",
+            havingValue = "true",
+            matchIfMissing = true)
+    public OpenCliCliStartupChecker openCliCliStartupChecker(
+            OpenCliExecutor openCliExecutor,
+            OpenCliStarterProperties openCliProperties,
+            OpenCliAvailabilityChecker availabilityChecker,
+            Environment environment) {
+        return new OpenCliCliStartupChecker(
+                openCliExecutor, openCliProperties, availabilityChecker, environment);
     }
 
     /**
