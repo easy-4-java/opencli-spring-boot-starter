@@ -2,6 +2,7 @@ package io.github.hiwepy.opencli.spring.boot;
 
 import io.github.hiwepy.opencli.OpenCliClient;
 import io.github.hiwepy.opencli.core.OpenCliExecutor;
+import io.github.hiwepy.opencli.core.availability.OpenCliAvailabilityChecker;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,7 +22,8 @@ import static org.junit.jupiter.api.Assertions.assertSame;
         properties = {
                 "opencli.enabled=true",
                 "opencli.executable=opencli",
-                "opencli.command-timeout-millis=120000"
+                "opencli.command-timeout-millis=120000",
+                "opencli.startup-check-enabled=false"
         })
 class OpenCliAutoConfigurationTest {
 
@@ -34,6 +36,9 @@ class OpenCliAutoConfigurationTest {
     @Autowired
     private OpenCliClient openCliClient;
 
+    @Autowired
+    private OpenCliAvailabilityChecker availabilityChecker;
+
     /**
      * 验证核心 Bean 可用且客户端持有同一执行器引用。
      */
@@ -42,6 +47,7 @@ class OpenCliAutoConfigurationTest {
         assertNotNull(properties);
         assertNotNull(executor);
         assertNotNull(openCliClient);
+        assertNotNull(availabilityChecker);
         assertNotNull(openCliClient.getExecutor());
         assertSame(executor, openCliClient.getExecutor());
     }
