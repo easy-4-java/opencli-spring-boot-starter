@@ -44,6 +44,7 @@ python3 scripts/render-branch-pom.py <branch>   # 与 opencli-java-sdk 同分支
 
 - 绑定 `opencli.*` 到 `OpenCliStarterProperties`（继承 SDK `OpenCliProperties`）
 - 注册单例 `OpenCliExecutor` 与 `OpenCliClient`（共享同一执行器）
+- 启动时执行 `opencli list` 探测（`LOCAL_PROCESS` 模式；`REMOTE_AGENT_HTTP` 自动跳过）；失败默认仅 WARN
 - `opencli.browser-profile` 映射为 `leadingArguments` 前缀 `--profile <name>`（与 CLI profile 一致）
 - `opencli.center.ws.*` 可选注册 `OpenCliWsReverseAgentClient`（`enabled=true`）
 - `opencli.facade.beans.enabled=true` 时额外注册：`OpenCliMetaClient`、`OpenCliBrowserClient`、`CodexOpenCliClient`、`CursorOpenCliClient`、`ClaudeOpenCliClient`、`ChatgptOpenCliClient`、`GeminiOpenCliClient`、`JimengOpenCliClient`、`NpmOpenCliClient`、`ArxivOpenCliClient`、`WikipediaOpenCliClient`、`BinanceOpenCliClient`
@@ -56,6 +57,9 @@ opencli:
   enabled: true
   executable: opencli
   command-timeout-millis: 300000
+  startup-probe-timeout-millis: 30000
+  startup-check-enabled: true
+  fail-fast-on-unavailable: false
   browser-profile: work              # → leadingArguments: --profile work
   execution-target: REMOTE_AGENT_HTTP   # 或 LOCAL_PROCESS（默认）
   remote-agent-base-url: http://192.168.1.10:19823
