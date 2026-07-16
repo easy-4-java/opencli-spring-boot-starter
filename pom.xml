@@ -48,7 +48,7 @@
         <java.version>17</java.version>
         <maven.compiler.release>${java.version}</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <opencli-java-sdk.version>2.0.x.20260717-SNAPSHOT</opencli-java-sdk.version>
+        <opencli-java-sdk.version>2.0.x.20260630-SNAPSHOT</opencli-java-sdk.version>
         <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
     </properties>
 
