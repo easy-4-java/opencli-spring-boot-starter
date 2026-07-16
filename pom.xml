@@ -13,10 +13,10 @@
 
     <groupId>io.github.hiwepy</groupId>
     <artifactId>opencli-spring-boot-starter</artifactId>
-    <version>4.0.x.20260527-SNAPSHOT</version>
+    <version>4.0.x.20260630-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>${project.groupId}:${project.artifactId}</name>
-    <description>Spring Boot starter for OpenCLI Java SDK (line 4.0.x; compile JDK 21)</description>
+    <description>Spring Boot starter for OpenCLI Java SDK (line 4.0.x; compile JDK 17; SDK 3.0.x)</description>
     <url>https://github.com/hiwepy/${project.artifactId}</url>
 
     <licenses>
@@ -48,7 +48,7 @@
         <java.version>17</java.version>
         <maven.compiler.release>${java.version}</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <opencli-java-sdk.version>4.0.x.20260527-SNAPSHOT</opencli-java-sdk.version>
+        <opencli-java-sdk.version>3.0.x.20260717-SNAPSHOT</opencli-java-sdk.version>
         <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
     </properties>
 
