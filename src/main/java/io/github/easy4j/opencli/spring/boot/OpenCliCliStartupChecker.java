@@ -1,10 +1,10 @@
-package io.github.hiwepy.opencli.spring.boot;
+package io.github.easy4j.opencli.spring.boot;
 
-import io.github.hiwepy.opencli.core.OpenCliExecutor;
-import io.github.hiwepy.opencli.core.availability.OpenCliAvailabilityChecker;
-import io.github.hiwepy.opencli.core.availability.OpenCliAvailabilityReport;
-import io.github.hiwepy.opencli.core.availability.OpenCliAvailabilityStatus;
-import io.github.hiwepy.opencli.exception.OpenCliStartupException;
+import io.github.easy4j.opencli.core.OpenCliExecutor;
+import io.github.easy4j.opencli.core.availability.OpenCliAvailabilityChecker;
+import io.github.easy4j.opencli.core.availability.OpenCliAvailabilityReport;
+import io.github.easy4j.opencli.core.availability.OpenCliAvailabilityStatus;
+import io.github.easy4j.opencli.exception.OpenCliStartupException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
@@ -72,7 +72,7 @@ public class OpenCliCliStartupChecker implements ApplicationRunner {
 
     private static boolean isOpenCliStarterOnClasspath() {
         try {
-            Class.forName("io.github.hiwepy.opencli.spring.boot.OpenCliAutoConfiguration");
+            Class.forName("io.github.easy4j.opencli.spring.boot.OpenCliAutoConfiguration");
             return true;
         } catch (ClassNotFoundException ex) {
             return false;
