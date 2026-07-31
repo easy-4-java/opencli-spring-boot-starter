@@ -1,6 +1,6 @@
-package io.github.hiwepy.opencli.spring.boot;
+package io.github.easy4j.opencli.spring.boot;
 
-import io.github.hiwepy.opencli.OpenCliProperties;
+import io.github.easy4j.opencli.OpenCliProperties;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.boot.context.properties.ConfigurationProperties;
