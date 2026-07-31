@@ -1,8 +1,8 @@
-package io.github.hiwepy.opencli.spring.boot;
+package io.github.easy4j.opencli.spring.boot;
 
-import io.github.hiwepy.opencli.OpenCliClient;
-import io.github.hiwepy.opencli.core.OpenCliExecutor;
-import io.github.hiwepy.opencli.core.availability.OpenCliAvailabilityChecker;
+import io.github.easy4j.opencli.OpenCliClient;
+import io.github.easy4j.opencli.core.OpenCliExecutor;
+import io.github.easy4j.opencli.core.availability.OpenCliAvailabilityChecker;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
