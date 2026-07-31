@@ -1,7 +1,7 @@
-package io.github.hiwepy.opencli.spring.boot;
+package io.github.easy4j.opencli.spring.boot;
 
-import io.github.hiwepy.opencli.center.ws.OpenCliCenterWebSocketPath;
-import io.github.hiwepy.opencli.center.ws.OpenCliWsAgentConnectionProperties;
+import io.github.easy4j.opencli.center.ws.OpenCliCenterWebSocketPath;
+import io.github.easy4j.opencli.center.ws.OpenCliWsAgentConnectionProperties;
 import lombok.Data;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
