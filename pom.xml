@@ -10,12 +10,12 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
-	<groupId>io.github.hiwepy</groupId>
+	<groupId>io.github.easy4j</groupId>
 	<artifactId>opencli-spring-boot-starter</artifactId>
 	<description>Spring Boot starter for OpenCLI Java SDK (line 2.3.x; compile JDK 1.8; SDK 1.0.x)</description>
 	<version>2.3.x.20260630-SNAPSHOT</version>
 	<name>${project.groupId}:${project.artifactId}</name>
-	<url>https://github.com/hiwepy/${project.artifactId}</url>
+	<url>https://github.com/easy-4-java/${project.artifactId}</url>
 	<packaging>jar</packaging>
 
 	<licenses>
@@ -26,9 +26,9 @@
 	</licenses>
 
 	<scm>
-		<connection>scm:git:https:github.com/hiwepy/${project.artifactId}.git</connection>
-		<developerConnection>scm:git:https:github.com/hiwepy/${project.artifactId}.git</developerConnection>
-		<url>https:github.com/hiwepy/${project.artifactId}</url>
+		<connection>scm:git:https:github.com/easy-4-java/${project.artifactId}.git</connection>
+		<developerConnection>scm:git:https:github.com/easy-4-java/${project.artifactId}.git</developerConnection>
+		<url>https:github.com/easy-4-java/${project.artifactId}</url>
 		<tag>${project.artifactId}</tag>
 	</scm>
 
@@ -281,6 +281,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-deploy-plugin</artifactId>
+				<version>3.1.4</version>
 			</plugin>
 		</plugins>
 	</build>
@@ -435,7 +436,7 @@
 
 		<!-- SDK dependency -->
 		<dependency>
-			<groupId>io.github.hiwepy</groupId>
+			<groupId>io.github.easy4j</groupId>
 			<artifactId>opencli-java-sdk</artifactId>
 			<version>${opencli-java-sdk.version}</version>
 		</dependency>
