@@ -1,79 +1,191 @@
+<a id="readme-top"></a>
+
+<div align="center">
+
 # opencli-spring-boot-starter
 
-Spring Boot Starter，自动装配 [opencli-java-sdk](../opencli-java-sdk)，支持本机 `opencli` 子进程或与 opencli-admin 兼容的远端 Agent（`POST /collect`）。
+**Spring Boot Starter for opencli**
 
-## Maven
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.easy4j/opencli-spring-boot-starter)](https://github.com/easy-4-java/opencli-spring-boot-starter)
+[![Java](https://img.shields.io/badge/Java-17-orange)](#3-requirements-and-compatibility)
+[![License](https://img.shields.io/badge/license-Apache-2.0-green)](https://www.apache.org/licenses/LICENSE-2.0)
+
+[简体中文](./README.zh-CN.md) | [English](./README.md)
+
+[Positioning](#1-positioning) · [Capabilities](#2-core-capabilities) ·
+[Dependency](#5-dependency) · [Quick Start](#6-quick-start) ·
+[Configuration](#7-configuration-reference) · [Versions](#9-version-lines-and-compatibility) ·
+[Build](#10-build-and-test) · [License](#12-license)
+
+</div>
+
+---
+
+> **Current Version**：`3.5.x.20260630-SNAPSHOT`<br>
+> **JDK Baseline**：`17`<br>
+> **Group ID**：`io.github.easy4j`<br>
+> **Artifact ID**：`opencli-spring-boot-starter`<br>
+> **License**：Apache License 2.0<br>
+
+## 1. Positioning
+
+**opencli-spring-boot-starter** is a Spring Boot starter that integrates **opencli** for applications using opencli. It provides auto-configuration, property binding, and ready-to-use beans so that applications can consume opencli capabilities with minimal setup.
+
+| Dimension | Description |
+|---|---|
+| Type | Spring Boot Starter |
+| Consumers | Spring Boot applications using opencli |
+| Core Capabilities | auto-configuration, property binding, ready-to-use beans for opencli |
+| JDK | `17` |
+| Coordinates | `io.github.easy4j:opencli-spring-boot-starter:3.5.x.20260630-SNAPSHOT` |
+| Config Prefix | `opencli` |
+
+## 2. Core Capabilities
+
+| Capability | Status | Description |
+|---|:---:|---|
+| Auto-configuration | ✅ Stable | Registers opencli beans automatically |
+| Property Binding | ✅ Stable | Binds `opencli.*` to `OpenCliCenterWsProperties` |
+| `OpenCliExecutor` bean | ✅ Stable | Auto-registered via OpenCliAutoConfiguration |
+
+## 3. Requirements and Compatibility
+
+| Dependency | Minimum | Evidence |
+|---|---:|---|
+| JDK | `17` | `pom.xml` |
+| Spring Boot | `3.5.9` | `pom.xml` parent |
+| Maven | `3.6+` | Maven Enforcer |
+
+## 4. Auto-configuration
+
+The starter auto-configures the following beans:
+
+| Bean | Condition | Missing Behavior |
+|---|---|---|
+| `OpenCliExecutor` | classpath + property | not created |
+| `OpenCliClient` | classpath + property | not created |
+| `OpenCliAvailabilityChecker` | classpath + property | not created |
+| `OpenCliCliStartupChecker` | classpath + property | not created |
+| `OpenCliWsReverseAgentClient` | classpath + property | not created |
+| `OpenCliMetaClient` | classpath + property | not created |
+| `OpenCliBrowserClient` | classpath + property | not created |
+| `CodexOpenCliClient` | classpath + property | not created |
+| `CursorOpenCliClient` | classpath + property | not created |
+| `ClaudeOpenCliClient` | classpath + property | not created |
+| `ChatgptOpenCliClient` | classpath + property | not created |
+| `GeminiOpenCliClient` | classpath + property | not created |
+| `JimengOpenCliClient` | classpath + property | not created |
+| `NpmOpenCliClient` | classpath + property | not created |
+| `ArxivOpenCliClient` | classpath + property | not created |
+| `WikipediaOpenCliClient` | classpath + property | not created |
+| `BinanceOpenCliClient` | classpath + property | not created |
+
+Auto-configuration registration:
+
+- `META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports` (Spring Boot 2.7+ / 3.x / 4.x)
+- `META-INF/spring.factories` (Spring Boot 2.x legacy)
+
+## 5. Dependency
 
 ```xml
 <dependency>
-  <groupId>io.github.hiwepy</groupId>
-  <artifactId>opencli-spring-boot-starter</artifactId>
-  <version>3.3.x.20260516-SNAPSHOT</version>
+    <groupId>io.github.easy4j</groupId>
+    <artifactId>opencli-spring-boot-starter</artifactId>
+    <version>3.5.x.20260630-SNAPSHOT</version>
 </dependency>
 ```
 
-需先将**同分支、同日期后缀**的 `opencli-java-sdk` 安装到本地或发布到可达的 Maven 仓库。
+This starter depends on the following components (managed by ddd4j BOM):
 
-发布到阿里云 Packages（`pom.xml` 已配置 `distributionManagement`）：
-
-```bash
-python3 scripts/render-branch-pom.py <branch>
-mvn clean deploy -Dmaven.test.skip=true
+```xml
+<dependency>
+    <groupId>io.github.easy4j</groupId>
+    <artifactId>opencli-java-sdk</artifactId>
+</dependency>
 ```
 
-`settings.xml` 中需配置 `2624322-release-6F6h6R` 与 `2624322-snapshot-3EoOv3` 的私服账号。
+## 6. Quick Start
 
-## 多版本与 JDK（对齐 dreamina-spring-boot-starter）
+### 6.1 Add dependency
 
-`pom.xml` 由脚本按 Spring Boot 线生成：`spring-boot-starter-parent`、`maven-compiler-plugin` 的 `release` 与 `opencli-java-sdk.version` 与分支前缀一致。
+Add the dependency above to your `pom.xml`.
 
-```bash
-python3 scripts/render-branch-pom.py <branch>   # 与 opencli-java-sdk 同分支名：3.3.x、2.7.x、4.0.x 等
-```
-
-| 分支 | Spring Boot parent | 编译 JDK | 与 SDK 版本 |
-|------|-------------------|----------|-------------|
-| `2.3.x` | 2.3.12.RELEASE | **8** | 同前缀 `2.3.x.*` |
-| `2.7.x` | 2.7.18 | **11** | `2.7.x.*` |
-| `3.0.x` … `3.4.x` | 3.0.13 … 3.4.2 | 17 | 与各 `3.x.x.*` 对齐 |
-| `3.3.x`（默认） | **3.3.6** | **17** | `3.3.x.*-SNAPSHOT` |
-| `3.5.x` | 3.5.6 | 21 | `3.5.x.*` |
-| `4.0.x` | 4.0.6 | 21 | `4.0.x.*` |
-
-## 自动配置
-
-- 绑定 `opencli.*` 到 `OpenCliStarterProperties`（继承 SDK `OpenCliProperties`）
-- 注册单例 `OpenCliExecutor` 与 `OpenCliClient`（共享同一执行器）
-- 启动时执行 `opencli list` 探测（`LOCAL_PROCESS` 模式；`REMOTE_AGENT_HTTP` 自动跳过）；失败默认仅 WARN
-- `opencli.browser-profile` 映射为 `leadingArguments` 前缀 `--profile <name>`（与 CLI profile 一致）
-- `opencli.center.ws.*` 可选注册 `OpenCliWsReverseAgentClient`（`enabled=true`）
-- `opencli.facade.beans.enabled=true` 时额外注册：`OpenCliMetaClient`、`OpenCliBrowserClient`、`CodexOpenCliClient`、`CursorOpenCliClient`、`ClaudeOpenCliClient`、`ChatgptOpenCliClient`、`GeminiOpenCliClient`、`JimengOpenCliClient`、`NpmOpenCliClient`、`ArxivOpenCliClient`、`WikipediaOpenCliClient`、`BinanceOpenCliClient`
-- `META-INF/spring.factories` 与 `AutoConfiguration.imports` 兼容 Boot 2.7 / 3.x 发现机制
-
-## application.yml 示例
+### 6.2 Configure
 
 ```yaml
 opencli:
   enabled: true
-  executable: opencli
-  command-timeout-millis: 300000
-  startup-probe-timeout-millis: 30000
-  startup-check-enabled: true
-  fail-fast-on-unavailable: false
-  browser-profile: work              # → leadingArguments: --profile work
-  execution-target: REMOTE_AGENT_HTTP   # 或 LOCAL_PROCESS（默认）
-  remote-agent-base-url: http://192.168.1.10:19823
-  remote-collect-mode: cdp
-  remote-output-format: json
-  remote-capture-raw-http-response: false
-  facade:
-    beans:
-      enabled: true                  # 注册常用强类型 Bean
-  center:
-    ws:
-      enabled: false
 ```
 
-## License
+### 6.3 Use the bean
 
-Apache License 2.0
+```java
+@SpringBootApplication
+public class Application {
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
+}
+```
+
+Then inject the auto-configured bean in your code:
+
+```java
+@Autowired
+private OpenCliExecutor openCliExecutor;
+```
+
+## 7. Configuration Reference
+
+### 7.1 Config Prefix
+
+`opencli`
+
+### 7.2 Configuration Items
+
+| Property | Type | Default | Required | Description | Sensitive |
+|---|---|---|:---:|---|:---:|
+| `opencli.enabled` | boolean | `true` | No | Enable the starter | No |
+<!-- additional properties below -->
+
+## 8. Version Lines and Compatibility
+
+| Branch | JDK | Spring Boot | Component Version | Status |
+|---|---:|---:|---|:---:|
+| `2.3.x` / `2.7.x` | `8+` | 2.3.x / 2.7.x | `1.0.x` | Maintenance |
+| `3.0.x` ~ `3.5.x` | `17` | 3.x | `2.0.x` | Maintenance |
+| `4.0.x` / `4.1.x` | `17+` | 4.x | `3.0.x` | Active |
+
+## 9. Build and Test
+
+```bash
+mvn clean verify
+mvn -pl opencli-spring-boot-starter -am test
+```
+
+## 10. Troubleshooting
+
+| Symptom | Diagnosis | Resolution |
+|---|---|---|
+| Bean not created | Check auto-configuration report | Verify `opencli.enabled=true` and classpath |
+| `ClassNotFoundException` | Missing dependency | Add the required module |
+| Version conflict | `mvn dependency:tree` | Use BOM for version alignment |
+
+## 11. Contribution
+
+1. Fork the repository.
+2. Create a feature branch.
+3. Run `mvn clean verify` before submitting.
+4. Submit a pull request.
+
+## 12. License
+
+This project is licensed under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0).
+
+---
+
+<div align="center">
+
+[Back to top](#readme-top) · [Issues](https://github.com/easy-4-java/opencli-spring-boot-starter/issues) · [Repository](https://github.com/easy-4-java/opencli-spring-boot-starter)
+
+</div>
