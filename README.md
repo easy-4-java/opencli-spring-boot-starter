@@ -6,7 +6,7 @@ Spring Boot Starter，自动装配 [opencli-java-sdk](../opencli-java-sdk)，支
 
 ```xml
 <dependency>
-  <groupId>io.github.hiwepy</groupId>
+  <groupId>io.github.easy4j</groupId>
   <artifactId>opencli-spring-boot-starter</artifactId>
   <version>3.3.x.20260516-SNAPSHOT</version>
 </dependency>
