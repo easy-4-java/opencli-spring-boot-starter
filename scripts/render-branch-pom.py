@@ -109,13 +109,13 @@ def write_pom(
         <relativePath/>
     </parent>
 
-    <groupId>io.github.hiwepy</groupId>
+    <groupId>io.github.easy4j</groupId>
     <artifactId>opencli-spring-boot-starter</artifactId>
     <version>{ver}</version>
     <packaging>jar</packaging>
     <name>${{project.groupId}}:${{project.artifactId}}</name>
     <description>Spring Boot starter for OpenCLI Java SDK (line {version_prefix}; compile JDK {jdk_label})</description>
-    <url>https://github.com/hiwepy/${{project.artifactId}}</url>
+    <url>https://github.com/easy-4-java/${{project.artifactId}}</url>
 
     <licenses>
         <license>
@@ -125,9 +125,9 @@ def write_pom(
     </licenses>
 
     <scm>
-        <connection>scm:git:https://github.com/hiwepy/${{project.artifactId}}.git</connection>
-        <developerConnection>scm:git:https://github.com/hiwepy/${{project.artifactId}}.git</developerConnection>
-        <url>https://github.com/hiwepy/${{project.artifactId}}</url>
+        <connection>scm:git:https://github.com/easy-4-java/${{project.artifactId}}.git</connection>
+        <developerConnection>scm:git:https://github.com/easy-4-java/${{project.artifactId}}.git</developerConnection>
+        <url>https://github.com/easy-4-java/${{project.artifactId}}</url>
         <tag>${{project.artifactId}}</tag>
     </scm>
 
@@ -164,7 +164,7 @@ def write_pom(
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>io.github.hiwepy</groupId>
+            <groupId>io.github.easy4j</groupId>
             <artifactId>opencli-java-sdk</artifactId>
             <version>${{opencli-java-sdk.version}}</version>
         </dependency>

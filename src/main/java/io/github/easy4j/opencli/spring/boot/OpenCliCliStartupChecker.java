@@ -72,7 +72,7 @@ public class OpenCliCliStartupChecker implements ApplicationRunner {
 
     private static boolean isOpenCliStarterOnClasspath() {
         try {
-            Class.forName("io.github.hiwepy.opencli.spring.boot.OpenCliAutoConfiguration");
+            Class.forName("io.github.easy4j.opencli.spring.boot.OpenCliAutoConfiguration");
             return true;
         } catch (ClassNotFoundException ex) {
             return false;

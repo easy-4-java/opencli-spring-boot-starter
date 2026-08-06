@@ -12,7 +12,7 @@ import org.springframework.boot.context.properties.NestedConfigurationProperty;
 public class OpenCliCenterWsProperties {
 
     /**
-     * 是否注册 {@link io.github.hiwepy.opencli.center.ws.OpenCliWsReverseAgentClient} Bean。
+     * 是否注册 {@link io.github.easy4j.opencli.center.ws.OpenCliWsReverseAgentClient} Bean。
      */
     private boolean enabled = false;
 
