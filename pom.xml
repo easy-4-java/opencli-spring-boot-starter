@@ -53,6 +53,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <opencli-java-sdk.version>3.0.x.20260630-SNAPSHOT</opencli-java-sdk.version>
         <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
+        <commons-io.version>2.22.0</commons-io.version>
     </properties>
 
     <dependencies>
@@ -101,10 +102,22 @@
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.11.0</version>
+            <version>${commons-io.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
 
     <distributionManagement>
 
