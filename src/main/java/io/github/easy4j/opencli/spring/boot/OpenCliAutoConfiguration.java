@@ -34,7 +34,7 @@ import org.springframework.util.StringUtils;
  * （对远程 HTTP 连接池与超时配置尤为重要）。
  * </p>
  *
- * @author wandl
+ * @author [@Loong Wan](https://github.com/loong10k)
  * @since 1.0.0
  */
 @Configuration
