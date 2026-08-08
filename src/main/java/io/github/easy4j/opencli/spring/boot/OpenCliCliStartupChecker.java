@@ -14,7 +14,7 @@ import org.springframework.core.env.Environment;
 /**
  * 应用启动时探测本机 {@code opencli} 是否可用（远程 Agent 模式自动跳过）。
  *
- * @author wandl
+ * @author [@Loong Wan](https://github.com/loong10k)
  * @since 1.0.0
  */
 @Slf4j
