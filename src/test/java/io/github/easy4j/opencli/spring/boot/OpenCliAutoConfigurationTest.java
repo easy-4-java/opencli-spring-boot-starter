@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 /**
  * 校验 Starter 能注册属性、执行器与 {@link OpenCliClient}。
  *
- * @author wandl
+ * @author [@Loong Wan](https://github.com/loong10k)
  * @since 1.0.0
  */
 @SpringBootTest(
