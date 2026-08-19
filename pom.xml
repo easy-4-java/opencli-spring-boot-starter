@@ -17,6 +17,7 @@
     <packaging>jar</packaging>
 
     <name>${project.groupId}:${project.artifactId}</name>
+            <url>https://github.com/loong10k</url>
     <description>Spring Boot starter for OpenCLI Java SDK (line 4.1.x; compile JDK 21; SDK 3.0.x)</description>
     <url>https://github.com/easy-4-java/${project.artifactId}</url>
 
@@ -54,7 +55,7 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven.version>3.0</maven.version>
+        <maven.version>3.6.3</maven.version>
         <!-- Third-Party Dependencies -->
         <commons-io.version>2.22.0</commons-io.version>
         <opencli-java-sdk.version>3.0.x.20260630-SNAPSHOT</opencli-java-sdk.version>
