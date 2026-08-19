@@ -7,6 +7,8 @@ import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
 /**
  * {@code opencli.center.ws.*} — 边缘反向 WebSocket Agent 连接配置。
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
  */
 @Data
 public class OpenCliCenterWsProperties {
@@ -23,6 +25,7 @@ public class OpenCliCenterWsProperties {
     public String getCentralApiBaseUrl() {
         return connection.getCentralApiBaseUrl();
     }
+    /** Sets the central api base url. */
 
     public void setCentralApiBaseUrl(String url) {
         connection.setCentralApiBaseUrl(url);
@@ -32,14 +35,17 @@ public class OpenCliCenterWsProperties {
     public String getAgentAdvertiseUrl() {
         return connection.getAgentAdvertiseUrl();
     }
+    /** Sets the agent advertise url. */
 
     public void setAgentAdvertiseUrl(String url) {
         connection.setAgentAdvertiseUrl(url);
     }
+    /** Gets the web socket path. */
 
     public OpenCliCenterWebSocketPath getWebSocketPath() {
         return connection.getWebSocketPath();
     }
+    /** Sets the web socket path. */
 
     public void setWebSocketPath(OpenCliCenterWebSocketPath path) {
         connection.setWebSocketPath(path);

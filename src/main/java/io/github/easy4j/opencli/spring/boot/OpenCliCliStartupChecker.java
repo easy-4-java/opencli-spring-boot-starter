@@ -58,6 +58,10 @@ public class OpenCliCliStartupChecker implements ApplicationRunner {
         }
         log.warn("OpenCLI startup check failed (fail-fast disabled): {}", message);
     }
+    /**
+     * <p>Build effective config snapshot.</p>
+     * @return the string
+     */
 
     private String buildEffectiveConfigSnapshot() {
         String profiles = environment.getProperty("spring.profiles.active", "(unset)");
@@ -69,6 +73,10 @@ public class OpenCliCliStartupChecker implements ApplicationRunner {
                 + ", opencli.fail-fast-on-unavailable=" + openCliProperties.isFailFastOnUnavailable()
                 + ", opencliStarterOnClasspath=" + isOpenCliStarterOnClasspath();
     }
+    /**
+     * <p>Is open cli starter on classpath.</p>
+     * @return the static boolean
+     */
 
     private static boolean isOpenCliStarterOnClasspath() {
         try {

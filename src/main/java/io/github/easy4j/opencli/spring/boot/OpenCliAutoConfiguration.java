@@ -27,16 +27,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.util.StringUtils;
 
-/**
- * 注册 OpenCLI Java SDK 在 Spring 环境下的单例 Bean。
- * <p>
- * 暴露共享 {@link OpenCliExecutor} 与 {@link OpenCliClient}，保证各门面复用同一执行器实例
- * （对远程 HTTP 连接池与超时配置尤为重要）。
- * </p>
- *
- * @author <a href="https://github.com/loong10k">Loong Wan</a>
- * @since 1.0.0
- */
 @Configuration
 @ConditionalOnClass(OpenCliExecutor.class)
 @EnableConfigurationProperties(OpenCliStarterProperties.class)
@@ -47,12 +37,6 @@ import org.springframework.util.StringUtils;
         matchIfMissing = true)
 public class OpenCliAutoConfiguration {
 
-    /**
-     * 构造与配置绑定的 OpenCLI 执行器。
-     *
-     * @param properties {@code opencli.*} 绑定结果
-     * @return 子进程或远程 Agent 的统一入口
-     */
     @Bean
     @ConditionalOnMissingBean
     public OpenCliExecutor openCliExecutor(OpenCliStarterProperties properties) {
@@ -60,9 +44,6 @@ public class OpenCliAutoConfiguration {
         return new OpenCliExecutor(properties);
     }
 
-    /**
-     * 将 {@code opencli.browser-profile} 写入 {@code leadingArguments}（{@code --profile}）。
-     */
     private static void applyBrowserProfilePrefix(OpenCliStarterProperties properties) {
         if (!StringUtils.hasText(properties.getBrowserProfile())) {
             return;
@@ -85,31 +66,18 @@ public class OpenCliAutoConfiguration {
         }
     }
 
-    /**
-     * 构造 SDK 顶层客户端，注入已存在的执行器 Bean。
-     *
-     * @param properties 与执行器一致的配置
-     * @param executor     共享执行器
-     * @return {@link OpenCliClient}
-     */
     @Bean
     @ConditionalOnMissingBean
     public OpenCliClient openCliClient(OpenCliStarterProperties properties, OpenCliExecutor executor) {
         return new OpenCliClient(properties, executor);
     }
 
-    /**
-     * CLI 可用性探测器（无状态）。
-     */
     @Bean
     @ConditionalOnMissingBean
     public OpenCliAvailabilityChecker openCliAvailabilityChecker() {
         return new OpenCliAvailabilityChecker();
     }
 
-    /**
-     * 启动时校验本机 {@code opencli}（远程模式跳过）。
-     */
     @Bean
     @ConditionalOnMissingBean
     @ConditionalOnProperty(
@@ -126,9 +94,6 @@ public class OpenCliAutoConfiguration {
                 openCliExecutor, openCliProperties, availabilityChecker, environment);
     }
 
-    /**
-     * 可选：中心反向 WebSocket Agent（{@code opencli.center.ws.enabled=true}）。
-     */
     @Bean(destroyMethod = "close")
     @ConditionalOnProperty(prefix = "opencli.center.ws", name = "enabled", havingValue = "true")
     @ConditionalOnMissingBean
@@ -137,76 +102,138 @@ public class OpenCliAutoConfiguration {
         return new OpenCliWsReverseAgentClient(properties, properties.getCenter().getConnection());
     }
 
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
     /** 可选门面 Bean：{@code opencli.facade.beans.enabled=true} 时注册常用强类型客户端。 */
     @Configuration
     @ConditionalOnProperty(prefix = "opencli.facade.beans", name = "enabled", havingValue = "true")
     static class OpenCliFacadeBeansConfiguration {
+        /**
+         * <p>Open cli meta client.</p>
+         * @param client the client
+         * @return the open cli meta client
+         */
 
         @Bean
         @ConditionalOnMissingBean
         public OpenCliMetaClient openCliMetaClient(OpenCliClient client) {
             return client.meta();
         }
+        /**
+         * <p>Open cli browser client.</p>
+         * @param client the client
+         * @return the open cli browser client
+         */
 
         @Bean
         @ConditionalOnMissingBean
         public OpenCliBrowserClient openCliBrowserClient(OpenCliClient client) {
             return client.browser();
         }
+        /**
+         * <p>Codex open cli client.</p>
+         * @param client the client
+         * @return the codex open cli client
+         */
 
         @Bean
         @ConditionalOnMissingBean
         public CodexOpenCliClient codexOpenCliClient(OpenCliClient client) {
             return client.codex();
         }
+        /**
+         * <p>Cursor open cli client.</p>
+         * @param client the client
+         * @return the cursor open cli client
+         */
 
         @Bean
         @ConditionalOnMissingBean
         public CursorOpenCliClient cursorOpenCliClient(OpenCliClient client) {
             return client.cursor();
         }
+        /**
+         * <p>Claude open cli client.</p>
+         * @param client the client
+         * @return the claude open cli client
+         */
 
         @Bean
         @ConditionalOnMissingBean
         public ClaudeOpenCliClient claudeOpenCliClient(OpenCliClient client) {
             return client.claude();
         }
+        /**
+         * <p>Chatgpt open cli client.</p>
+         * @param client the client
+         * @return the chatgpt open cli client
+         */
 
         @Bean
         @ConditionalOnMissingBean
         public ChatgptOpenCliClient chatgptOpenCliClient(OpenCliClient client) {
             return client.chatgpt();
         }
+        /**
+         * <p>Gemini open cli client.</p>
+         * @param client the client
+         * @return the gemini open cli client
+         */
 
         @Bean
         @ConditionalOnMissingBean
         public GeminiOpenCliClient geminiOpenCliClient(OpenCliClient client) {
             return client.gemini();
         }
+        /**
+         * <p>Jimeng open cli client.</p>
+         * @param client the client
+         * @return the jimeng open cli client
+         */
 
         @Bean
         @ConditionalOnMissingBean
         public JimengOpenCliClient jimengOpenCliClient(OpenCliClient client) {
             return client.jimeng();
         }
+        /**
+         * <p>Npm open cli client.</p>
+         * @param client the client
+         * @return the npm open cli client
+         */
 
         @Bean
         @ConditionalOnMissingBean
         public NpmOpenCliClient npmOpenCliClient(OpenCliClient client) {
             return client.npm();
         }
+        /**
+         * <p>Arxiv open cli client.</p>
+         * @param client the client
+         * @return the arxiv open cli client
+         */
 
         @Bean
         @ConditionalOnMissingBean
         public ArxivOpenCliClient arxivOpenCliClient(OpenCliClient client) {
             return client.arxiv();
         }
+        /**
+         * <p>Wikipedia open cli client.</p>
+         * @param client the client
+         * @return the wikipedia open cli client
+         */
 
         @Bean
         @ConditionalOnMissingBean
         public WikipediaOpenCliClient wikipediaOpenCliClient(OpenCliClient client) {
             return client.wikipedia();
         }
+        /**
+         * <p>Binance open cli client.</p>
+         * @param client the client
+         * @return the binance open cli client
+         */
 
         @Bean
         @ConditionalOnMissingBean
