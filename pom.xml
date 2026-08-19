@@ -54,6 +54,7 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.version>3.0</maven.version>
         <!-- Third-Party Dependencies -->
         <commons-io.version>2.22.0</commons-io.version>
         <opencli-java-sdk.version>3.0.x.20260630-SNAPSHOT</opencli-java-sdk.version>
