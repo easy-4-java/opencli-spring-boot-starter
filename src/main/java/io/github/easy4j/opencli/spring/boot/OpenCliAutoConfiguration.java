@@ -102,8 +102,6 @@ public class OpenCliAutoConfiguration {
         return new OpenCliWsReverseAgentClient(properties, properties.getCenter().getConnection());
     }
 
- * @author <a href="https://github.com/loong10k">Loong Wan</a>
- * @since 1.0.0
     /** 可选门面 Bean：{@code opencli.facade.beans.enabled=true} 时注册常用强类型客户端。 */
     @Configuration
     @ConditionalOnProperty(prefix = "opencli.facade.beans", name = "enabled", havingValue = "true")
